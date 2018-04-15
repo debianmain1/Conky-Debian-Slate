@@ -1,0 +1,124 @@
+conky.config = { 
+
+	background = true,
+	use_xft = true,
+	font = 'monospace:size=8',
+	xftalpha = 0.8,
+	update_interval = 1.0,
+	total_run_times = 0,
+	own_window = true,
+	own_window_transparent = false,
+	own_window_type = 'normal',
+	own_window_class = 'conky',
+	own_window_argb_visual = true,
+	own_window_colour = '#263041',
+	own_window_argb_value = 120,
+	own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
+	double_buffer = true,
+	draw_shades = false,
+	draw_outline = false,
+	draw_borders = false,
+	draw_graph_borders = true,
+	stippled_borders = 0,
+	border_width = 0,
+	default_color = 'white',
+	default_shade_color = 'gray',
+	default_outline_color = 'black',
+	alignment = 'top_right',
+	gap_x = 5,
+	gap_y = 0,
+	no_buffers = true,
+	cpu_avg_samples = 1,
+	net_avg_samples = 1,
+	override_utf8_locale = true,
+	use_spacer = 'right',
+	maximum_width = 400,
+        minimum_height = 1200,
+	uppercase = true,
+
+
+};
+
+conky.text = [[
+#leet chars: ┤┤└└┴┴┐┐││┘┘┌┌├├┬┬┼┼┴┴── ││ ▽▼△▲▵▴▾▿
+${alignc}${font xftfont monospace:size=12} Debian Main ${font}
+${alignr}${offset 12} └───────────  ${sysname}   
+${alignr}  │  
+${alignr}${offset -14}${machine} -─┤
+${alignr}${offset 7}│    │   
+${alignr}  < ${kernel} > Kernel -─┤    │  
+${alignr}  < ${exec cat /etc/issue.net} > Distro -─┤    │  
+${alignr}${offset -7}< ${execi 1000 cat /proc/cpuinfo|grep 'model name'|sed -e 's/model name.*: //'| uniq | cut -c 1-32} > -─┤    │ 
+${alignr}${offset -7}< ${execi 360 aptitude search "~U" | wc -l | tail} > UPDATES -─┘    │ 
+${alignr}  │  
+${alignr}${offset -14}system -─┤
+${alignr}│    │  
+${alignr}  cpu -─┤    │  
+${alignr}  used -─┤    │    │  
+${alignr}${offset -7} < ${cpu cpu 0}% > cpu0 -─┤    │    │    │ 
+${alignr}${offset -7} < ${cpu cpu 1}% > cpu1 -─┤    │    │    │ 
+${alignr}${offset -7} < ${cpu cpu 2}% > cpu2 -─┤    │    │    │ 
+${alignr}${offset -14} < ${cpu cpu 3}% > cpu3 -─┘    │    │    │
+${alignr}│    │    │  
+${alignr} freq -─┤    │    │  
+${alignr}  < ${freq 4}mhz > cpu0 -─┤    │    │    │  
+${alignr}  < ${freq 5}mhz > cpu1 -─┤    │    │    │  
+${alignr}${offset -7}  < ${freq 6}mhz > cpu2 -─┤    │    │    │ 
+${alignr}${offset -7}  < ${freq 7}mhz > cpu3 -─┘    │    │    │ 
+${alignr}${offset -14}│    │    │
+${alignr} < $loadavg > load -─┤    │    │  
+${alignr} < ${top name 1} ${top cpu 1} > -─┤    │    │  
+${alignr} < ${top name 2} ${top cpu 2} > -─┤    │    │  
+${alignr} < ${top name 3} ${top cpu 3} > -─┤    │    │  
+${alignr} < ${top name 4} ${top cpu 4} > -─┤    │    │  
+${alignr}${offset -14}< ${top name 5} ${top cpu 5} > -─┘    │    │
+${alignr}${offset -14}│    │
+${alignr} processes -─┤    │  
+${alignr} < $processes >   total -─┤    │    │  
+${alignr}${offset -14}< $running_processes > running -─┘    │    │
+${alignr}${offset -14}│    │
+${alignr}${offset -14}temperatures -─┤    │
+${alignr}${offset -7}cpu -─┤    │    │ 
+${alignr}${offset -14}< ${execi 5 sensors|grep 'Core 0'| awk -F'+' '{print $2}' | awk -F'.' '{print $1}'} °C > CPU0 -─┤    │    │    │
+${alignr}${offset -14}< ${execi 5 sensors|grep 'Core 1'| awk -F'+' '{print $2}' | awk -F'.' '{print $1}'} °C > CPU1 -─┤    │    │    │
+${alignr}${offset -14}< ${execi 5 sensors|grep 'Core 2'| awk -F'+' '{print $2}' | awk -F'.' '{print $1}'} °C > CPU2 -─┤    │    │    │
+${alignr}${offset -14}< ${execi 5 sensors|grep 'Core 3'| awk -F'+' '{print $2}' | awk -F'.' '{print $1}'} °C > CPU3 -─┘    │    │    │
+${alignr}${offset -14}│    │    │
+${alignr}${offset -14}gpu -─┘    │    │
+${alignr}${offset -7}< ${execi 5 nvidia-settings -t -q [gpu:0]/GPUCoreTemp} °C > GPU0 -─┤         │    │ 
+${alignr}${offset -7}< ${execi 5 nvidia-settings -t -q [gpu:1]/GPUCoreTemp} °C > GPU1 -─┘         │    │ 
+${alignr}${offset 7}│    │   
+${alignr} ram -─┤    │  
+${alignr} < $memperc% > used -─┤    │    │  
+${alignr} < $mem/$memmax > -─┘    │    │    │  
+${alignr} < ${top name 1} ${top mem 1} > -─┤    │    │  
+${alignr} < ${top name 2} ${top mem 2} > -─┤    │    │  
+${alignr} < ${top name 3} ${top mem 3} > -─┤    │    │  
+${alignr} < ${top name 4} ${top mem 4} > -─┤    │    │  
+${alignr}${offset -14}< ${top name 5} ${top mem 5} > -─┘    │    │
+${alignr}${offset -14}│    │
+${alignr} Disk Useage -─┘    │  
+${alignr}< $diskio_read >  read -─┤         │  
+${alignr}${offset -7}< $diskio_write > write -─┤         │ 
+${alignr}< ${fs_used /home}/${fs_size /home} > /home -─┤         │  
+${alignr}< ${fs_bar 5,120 /home} > -─┘     │         │  
+${alignr}< ${fs_used /}/${fs_size /} > /root -─┘         │  
+${alignr}${offset -14}< ${fs_bar 5,120 /} > -─┘               │
+${alignr}│  
+${alignr}${offset -7}  NETWORK -─┘ 
+${alignr}< ${tcp_portmon 1 65535 count} > connections -─┤       
+${alignr}${offset -49}< ${tcp_portmon 1 32767 count} > in / locale -─┤
+${alignr}${offset -7}< ${tcp_portmon 32768 61000 count} > out / locale -─┤      
+${alignr}${offset -49}< ${upspeed bond0} k/s >   up -─┤
+${alignr}${offset -14}│    │     
+${alignr}${offset -49} < ${upspeedgraph bond0 12,120 BA0B0B FC0707} > -─┘    │
+${alignr}│       
+${alignr}${offset -49}< ${downspeed bond0} k/s > down -─┘
+${alignr}${offset -6}│           
+${alignr}${offset -55}< ${downspeedgraph bond0 12,120 136311 11B014} > -─┘    
+
+${alignc}< ${execi 60 wget -O - -q icanhazip.com} > Wan
+${alignc}< ${addr bond0} > Lan
+       
+        
+]];
